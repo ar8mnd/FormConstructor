@@ -40,7 +40,10 @@ form.setNoneHandler(p -> {
 });
 
 form.send(player);
-//Also we can use `player.showFormWindow(form);` but it isn't comfortable
+/* 
+ * Also we can use `player.showFormWindow(form);` but it isn't comfortable
+ * When using `player.showFormWindow(form);` the PlayerFormSendEvent event will not be called
+ */
 ```
 
 For ModalForm:
@@ -52,7 +55,12 @@ form.setContent("Is OneKN gay?") //local meme in RuNukkitDev
     .setPositiveButton("Yes")
     .setNegativeButton("Sure");
 
-form.setResponse((p, result) -> {
+//We can set handler for null result
+form.setNoneHandler(p -> {
+    p.sendMessage("Why you closed this form? :c");
+});
+
+form.setHandler((p, result) -> {
     p.sendMessage(result? "I knew it!" : "Quite right :D");
 });
 
