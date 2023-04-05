@@ -55,7 +55,6 @@ form.setContent("Is OneKN gay?") //local meme in RuNukkitDev
     .setPositiveButton("Yes")
     .setNegativeButton("Sure");
 
-//We can set handler for null result
 form.setNoneHandler(p -> {
     p.sendMessage("Why you closed this form? :c");
 });
