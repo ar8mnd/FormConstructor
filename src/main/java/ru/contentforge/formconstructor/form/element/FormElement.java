@@ -7,7 +7,7 @@ abstract public class FormElement {
     @SerializedName("text") protected String name;
     public transient int index = -1;
 
-    public FormElement(String name){
+    public FormElement(String name) {
         this.name = name;
     }
 

@@ -1,8 +1,10 @@
 package ru.contentforge.formconstructor.task;
 
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.form.response.FormResponse;
 import cn.nukkit.scheduler.AsyncTask;
+import ru.contentforge.formconstructor.event.PlayerFormCloseEvent;
 import ru.contentforge.formconstructor.form.CloseableForm;
 import ru.contentforge.formconstructor.form.Form;
 import ru.contentforge.formconstructor.form.handler.NoneHandler;
@@ -16,7 +18,7 @@ public class FormHandlingTask extends AsyncTask {
     private final Form form;
     private final Player player;
 
-    public FormHandlingTask(FormResponse response, Form form, Player player){
+    public FormHandlingTask(FormResponse response, Form form, Player player) {
         this.response = response;
         this.form = form;
         this.player = player;
@@ -24,28 +26,31 @@ public class FormHandlingTask extends AsyncTask {
 
     @Override
     public void onRun() {
-        if(response instanceof ModalFormResponse){
+        if(response instanceof ModalFormResponse) {
             ((ModalFormResponse) response).handle(player);
             return;
         }
 
-        if(response == null && form instanceof CloseableForm){
+        if(response == null && form instanceof CloseableForm) {
+            
             NoneHandler noneHandler = ((CloseableForm) form).getNoneHandler();
+            
+            PlayerFormCloseEvent event = new PlayerFormCloseEvent(player, form);
+            Server.getInstance().getPluginManager().callEvent(event);
+            
             if(noneHandler != null) noneHandler.handle(player);
             return;
         }
 
-        if(response instanceof SimpleFormResponse){
+        if(response instanceof SimpleFormResponse) {
             ((SimpleFormResponse) form.getResponse()).handle(player);
             return;
         }
 
-        if(response instanceof CustomFormResponse){
+        if(response instanceof CustomFormResponse) {
             ((CustomFormResponse) form.getResponse()).handle(player);
             return;
         }
-
-        //...
     }
 
 }

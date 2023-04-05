@@ -6,26 +6,18 @@
 
     <groupId>ru.contentforge</groupId>
     <artifactId>FormConstructor</artifactId>
-    <version>1.1.2</version>
+    <version>1.1.3</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>FormConstructor</name>
-            <url>https://maven.pkg.github.com/ContentForge/FormConstructor</url>
-        </repository>
-    </distributionManagement>
-
     <developers>
         <developer>
             <name>Andrew Terentev</name>
             <url>github.com/qPexLegendary</url>
-        </developer>
+        </developer>    
     </developers>
 
     <repositories>
@@ -42,13 +34,23 @@
             <version>1.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.20</version>
+            <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
 
+     <build>
+        <defaultGoal>clean package</defaultGoal>
+        <finalName>${project.name}-${project.version}</finalName>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/resources/</directory>
+            </resource>
+        </resources>
+    </build>
 </project>

@@ -14,11 +14,11 @@ public class Dropdown extends CustomFormElement {
     @Getter protected transient List<SelectableElement> elements = new ArrayList<>();
     @Getter protected transient int selectedIndex = -1;
 
-    public Dropdown(List<SelectableElement> elements){
+    public Dropdown(List<SelectableElement> elements) {
         this("", elements);
     }
 
-    public Dropdown(String name, List<SelectableElement> elements){
+    public Dropdown(String name, List<SelectableElement> elements) {
         this(name, elements, 0);
     }
 
@@ -29,31 +29,31 @@ public class Dropdown extends CustomFormElement {
         addElements(elements);
     }
 
-    public void addElement(SelectableElement element){
+    public void addElement(SelectableElement element) {
         element.index = elements.size();
         elements.add(element);
         options.add(element.getText());
     }
 
-    public void addElement(String name, Object value){
+    public void addElement(String name, Object value) {
         addElement(new SelectableElement(name, value));
     }
 
-    public void addElement(String name){
+    public void addElement(String name) {
         addElement(name, null);
     }
 
-    public void addElements(Collection<SelectableElement> elements){
+    public void addElements(Collection<SelectableElement> elements) {
         for (SelectableElement element: elements) {
             addElement(element);
         }
     }
 
-    public SelectableElement getDefault(){
+    public SelectableElement getDefault() {
         return elements.size() == 0? null : elements.get(defaultIndex);
     }
 
-    public SelectableElement getValue(){
+    public SelectableElement getValue() {
         return elements.size() == 0? null : elements.get(selectedIndex);
     }
 

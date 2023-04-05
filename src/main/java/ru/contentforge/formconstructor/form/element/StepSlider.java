@@ -14,11 +14,11 @@ public class StepSlider extends CustomFormElement {
     @Getter protected transient List<SelectableElement> elements = new ArrayList<>();
     @Getter protected transient int selectedIndex = -1;
 
-    public StepSlider(List<SelectableElement> elements){
+    public StepSlider(List<SelectableElement> elements) {
         this("", elements);
     }
 
-    public StepSlider(String name, List<SelectableElement> elements){
+    public StepSlider(String name, List<SelectableElement> elements) {
         this(name, elements, 0);
     }
 
@@ -29,13 +29,13 @@ public class StepSlider extends CustomFormElement {
         addElements(elements);
     }
 
-    public void addElement(SelectableElement element){
+    public void addElement(SelectableElement element) {
         element.index = elements.size();
         elements.add(element);
         options.add(element.getText());
     }
 
-    public void addElement(String name, Object value){
+    public void addElement(String name, Object value) {
         addElement(new SelectableElement(name, value));
     }
 
@@ -43,20 +43,20 @@ public class StepSlider extends CustomFormElement {
         addElement(name, null);
     }
 
-    public void addElements(Collection<SelectableElement> elements){
+    public void addElements(Collection<SelectableElement> elements) {
         for (SelectableElement element: elements) {
             addElement(element);
         }
     }
 
-    public SelectableElement getDefault(){
+    public SelectableElement getDefault() {
         if(elements.size() == 0) return null;
-        return (elements.size() == 1 && defaultIndex == 1)? null : elements.get(defaultIndex);
+        return (elements.size() == 1 && defaultIndex == 1) ? null : elements.get(defaultIndex);
     }
 
     public SelectableElement getValue(){
         if(elements.size() == 0) return null;
-        return (elements.size() == 1 && selectedIndex == 1)? null : elements.get(selectedIndex);
+        return (elements.size() == 1 && selectedIndex == 1) ? null : elements.get(selectedIndex);
     }
 
     @Override

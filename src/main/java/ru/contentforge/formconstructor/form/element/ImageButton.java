@@ -12,7 +12,7 @@ public class ImageButton {
         this(ImageType.PATH, "");
     }
 
-    public ImageButton(ImageType type, String path){
+    public ImageButton(ImageType type, String path) {
         this.path = path;
         this.type = type;
     }

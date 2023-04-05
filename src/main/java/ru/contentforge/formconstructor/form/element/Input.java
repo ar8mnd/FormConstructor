@@ -1,9 +1,9 @@
 package ru.contentforge.formconstructor.form.element;
 
-import com.google.gson.annotations.SerializedName;
-import lombok.Getter;
 import ru.contentforge.formconstructor.form.element.validator.ValidationField;
 import ru.contentforge.formconstructor.form.element.validator.Validator;
+import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,17 +19,17 @@ public class Input extends CustomFormElement implements ValidationField {
     @Getter protected transient List<Validator> validators;
 
     @Deprecated
-    public Input(){
+    public Input() {
         this("");
     }
 
     @Deprecated
-    public Input(String name){
+    public Input(String name) {
         this(name, "");
     }
 
     @Deprecated
-    public Input(String name, String placeholder){
+    public Input(String name, String placeholder) {
         this(name, placeholder, "");
     }
 
@@ -73,7 +73,7 @@ public class Input extends CustomFormElement implements ValidationField {
     }
 
     @Override
-    public Input addValidator(Validator validator){
+    public Input addValidator(Validator validator) {
         this.validators.add(validator);
         return this;
     }
@@ -89,7 +89,7 @@ public class Input extends CustomFormElement implements ValidationField {
         private boolean trim = false;
         private List<Validator> validators = new ArrayList<>();
 
-        public InputBuilder setName(String name){
+        public InputBuilder setName(String name) {
             this.name = name;
             return this;
         }
@@ -109,12 +109,12 @@ public class Input extends CustomFormElement implements ValidationField {
             return this;
         }
 
-        public InputBuilder setValidators(List<Validator> validators){
+        public InputBuilder setValidators(List<Validator> validators) {
             this.validators = validators;
             return this;
         }
 
-        public InputBuilder addValidator(Validator... validator){
+        public InputBuilder addValidator(Validator... validator) {
             this.validators.addAll(Arrays.asList(validator));
             return this;
         }

@@ -1,33 +1,12 @@
 package ru.contentforge.formconstructor;
 
-import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.EventPriority;
-import cn.nukkit.event.Listener;
-import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.plugin.PluginBase;
-import ru.contentforge.formconstructor.form.Form;
-import ru.contentforge.formconstructor.task.FormHandlingTask;
+import ru.contentforge.formconstructor.listener.FormListener;
 
-public class FormConstructor extends PluginBase implements Listener {
+public class FormConstructor extends PluginBase {
 
     @Override
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(this, this);
+        this.getServer().getPluginManager().registerEvents(new FormListener(this), this);
     }
-
-    @EventHandler(priority = EventPriority.HIGHEST)
-    void onFormResponded(PlayerFormRespondedEvent event){
-        if(!(event.getWindow() instanceof Form)) return;
-
-        Form form = (Form) event.getWindow();
-        FormHandlingTask handler = new FormHandlingTask(
-                event.getResponse(),
-                (Form) event.getWindow(),
-                event.getPlayer()
-        );
-
-        if(form.isAsync()) getServer().getScheduler().scheduleAsyncTask(this, handler);
-        else handler.onRun();
-    }
-
 }

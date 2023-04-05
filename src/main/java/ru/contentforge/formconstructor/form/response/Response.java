@@ -9,7 +9,7 @@ abstract public class Response <T extends FormHandler> extends FormResponse {
     protected final String data;
     protected final T handler;
 
-    public Response(T handler, String data){
+    public Response(T handler, String data) {
         this.handler = handler;
         this.data = data;
     }

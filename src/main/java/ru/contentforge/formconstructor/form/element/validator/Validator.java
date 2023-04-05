@@ -7,7 +7,7 @@ public abstract class Validator {
     @Getter protected final String name;
     @Getter protected boolean validated;
 
-    public Validator(String name){
+    public Validator(String name) {
         this.name = name;
     }
 

@@ -10,7 +10,6 @@ abstract public class CustomFormElement extends FormElement {
 
     public CustomFormElement(String name, String type) {
         super(name);
-
         this.type = type;
     }
 

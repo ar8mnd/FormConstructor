@@ -8,11 +8,11 @@ public class SelectableElement {
     @Getter private final Object value;
     public int index = -1;
 
-    public SelectableElement(String text){
+    public SelectableElement(String text) {
         this(text, null);
     }
 
-    public SelectableElement(String text, Object value){
+    public SelectableElement(String text, Object value) {
         this.text = text;
         this.value = value;
     }
