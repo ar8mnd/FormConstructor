@@ -19,7 +19,7 @@ abstract public class Form extends FormWindow {
         Server.getInstance().getPluginManager().callEvent(event);
 
         if (!event.isCancelled()) {
-            this.async = async;
+            this.async = event.isAsync();
             player.showFormWindow(this);
         }
     }
