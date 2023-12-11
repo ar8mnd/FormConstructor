@@ -2,7 +2,7 @@ package ru.contentforge.formconstructor.form.element;
 
 import com.google.gson.annotations.SerializedName;
 
-abstract public class FormElement {
+public abstract class FormElement {
 
     @SerializedName("text") protected String name;
     public transient int index = -1;

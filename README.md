@@ -93,7 +93,7 @@ form.setHandler((p, response) -> {
     
     SelectableElement el = response.getDropdown("my-dd").getValue();
     p.sendMessage(el.getText());
-    if(el.getValue() != null) p.sendMessage(el.getValue(Integer.class));
+    if (el.getValue() != null) p.sendMessage(el.getValue(Integer.class));
     
     el = response.getStepSlider("my-ss").getValue();
     p.sendMessage(el.getText());

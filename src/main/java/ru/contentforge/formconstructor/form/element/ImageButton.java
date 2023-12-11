@@ -8,7 +8,7 @@ public class ImageButton {
     @Getter @SerializedName("type") protected ImageType type;
     @Getter @SerializedName("data") protected String path;
 
-    public ImageButton(){
+    public ImageButton() {
         this(ImageType.PATH, "");
     }
 

@@ -2,7 +2,7 @@ package ru.contentforge.formconstructor.form.element;
 
 public class Label extends CustomFormElement {
 
-    public Label(){
+    public Label() {
         this("");
     }
 

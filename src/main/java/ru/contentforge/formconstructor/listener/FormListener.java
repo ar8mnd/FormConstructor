@@ -18,7 +18,7 @@ public class FormListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onFormResponded(PlayerFormRespondedEvent event) {
-        if(!(event.getWindow() instanceof Form)) return;
+        if (!(event.getWindow() instanceof Form)) return;
 
         Form form = (Form) event.getWindow();
         FormHandlingTask handler = new FormHandlingTask(event.getResponse(), (Form) event.getWindow(), event.getPlayer());
@@ -27,7 +27,6 @@ public class FormListener implements Listener {
             main.getServer().getScheduler().scheduleAsyncTask(main, handler);
         } else {
             handler.onRun();
-        }
-            
+        }    
     }
 }

@@ -3,12 +3,13 @@ package ru.contentforge.formconstructor.form;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.form.window.FormWindow;
-import lombok.Getter;
 import ru.contentforge.formconstructor.event.PlayerFormSendEvent;
+import lombok.Getter;
 
-abstract public class Form extends FormWindow {
+@Getter
+public abstract class Form extends FormWindow {
 
-    @Getter protected transient boolean async = false;
+    protected transient boolean async;
 
     public void send(Player player) {
         this.send(player, false);
@@ -27,5 +28,4 @@ abstract public class Form extends FormWindow {
     public void sendAsync(Player player) {
         this.send(player, true);
     }
-
 }

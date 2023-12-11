@@ -2,10 +2,11 @@ package ru.contentforge.formconstructor.form.element.validator;
 
 import lombok.Getter;
 
+@Getter
 public abstract class Validator {
 
-    @Getter protected final String name;
-    @Getter protected boolean validated;
+    protected final String name;
+    protected boolean validated;
 
     public Validator(String name) {
         this.name = name;

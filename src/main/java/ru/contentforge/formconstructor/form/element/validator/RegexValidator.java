@@ -14,5 +14,4 @@ public class RegexValidator extends Validator {
     public void validate(String input) {
         validated = input.matches(regex);
     }
-
 }

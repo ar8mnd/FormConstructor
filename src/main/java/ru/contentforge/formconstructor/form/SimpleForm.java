@@ -43,8 +43,8 @@ public class SimpleForm extends CloseableForm {
         this.content = content;
         this.noneHandler = noneHandler;
 
-        if(buttons == null) return;
-        for(Button button: buttons) addButton(button);
+        if (buttons == null) return;
+        for (Button button: buttons) addButton(button);
     }
 
     public SimpleForm addContent(String addition) {
@@ -70,18 +70,18 @@ public class SimpleForm extends CloseableForm {
     }
 
     public SimpleForm addButtons(Button... buttons) {
-        for(Button button: buttons) addButton(button);
+        for (Button button: buttons) addButton(button);
         return this;
     }
 
     public SimpleForm addButtons(Collection<Button> buttons) {
-        for(Button button: buttons) addButton(button);
+        for (Button button: buttons) addButton(button);
         return this;
     }
 
     @Override
     public void setResponse(String data) {
-        if(data.equals("null")) return;
+        if (data.equals("null")) return;
 
         int buttonId;
         try {
@@ -89,14 +89,13 @@ public class SimpleForm extends CloseableForm {
         } catch (Exception var4) {
             return;
         }
-        if(buttonId >= buttons.size() || buttonId < 0){
+        if (buttonId >= buttons.size() || buttonId < 0) {
             this.response = new SimpleFormResponse(new Button("Invalid", (p, b) -> send(p)));
             return;
         }
 
-        for(int i = 0; i < buttons.size(); i++) buttons.get(i).index = i;
+        for (int i = 0; i < buttons.size(); i++) buttons.get(i).index = i;
 
         this.response = new SimpleFormResponse(buttons.get(buttonId));
     }
-
 }

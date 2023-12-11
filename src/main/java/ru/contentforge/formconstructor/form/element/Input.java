@@ -49,7 +49,7 @@ public class Input extends CustomFormElement implements ValidationField {
 
     @Override
     public boolean respond(Object value) {
-        if(trim) this.value = ((String) value).trim();
+        if (trim) this.value = ((String) value).trim();
         else this.value = (String) value;
 
         validate();
@@ -59,15 +59,15 @@ public class Input extends CustomFormElement implements ValidationField {
 
     @Override
     public void validate() {
-        for(Validator validator: validators){
+        for (Validator validator: validators) {
             validator.validate(value);
         }
     }
 
     @Override
     public boolean getValidatorResult() {
-        for(Validator validator: validators){
-            if(!validator.isValidated()) return false;
+        for (Validator validator: validators) {
+            if (!validator.isValidated()) return false;
         }
         return true;
     }

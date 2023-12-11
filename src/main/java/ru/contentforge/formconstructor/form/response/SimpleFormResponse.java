@@ -10,14 +10,12 @@ public class SimpleFormResponse extends Response<SimpleFormHandler> {
 
     public SimpleFormResponse(Button button) {
         super(button.getHandler(), "");
-
         this.button = button;
     }
 
     @Override
     public void handle(Player player) {
-        if(handler == null) return;
+        if (handler == null) return;
         handler.handle(player, button);
     }
-
 }

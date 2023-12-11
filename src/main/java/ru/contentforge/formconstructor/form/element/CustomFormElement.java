@@ -2,7 +2,7 @@ package ru.contentforge.formconstructor.form.element;
 
 import com.google.gson.annotations.SerializedName;
 
-abstract public class CustomFormElement extends FormElement {
+public abstract class CustomFormElement extends FormElement {
 
     @SerializedName("type") protected final String type;
     public transient String elementId = null;

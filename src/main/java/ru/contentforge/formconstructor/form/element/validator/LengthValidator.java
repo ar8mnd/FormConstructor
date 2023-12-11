@@ -15,5 +15,4 @@ public class LengthValidator extends Validator {
     public void validate(String input) {
         validated = (min == -1 || input.length() >= min) && (max == -1 || max >= input.length());
     }
-
 }

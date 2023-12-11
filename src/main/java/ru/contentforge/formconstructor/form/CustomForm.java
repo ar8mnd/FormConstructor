@@ -18,20 +18,34 @@ import java.util.HashSet;
 @Accessors(chain = true)
 public class CustomForm extends CloseableForm {
 
-    @SerializedName("type") protected final String type = "custom_form";
-    @Getter @Setter @SerializedName("title") protected String title;
-    @Getter @SerializedName("content") protected ArrayList<CustomFormElement> elements = new ArrayList<>();
-    @Setter protected transient CustomFormHandler handler;
-    @Getter protected transient CustomFormResponse response = null;
+    @SerializedName("type")
+    protected final String type = "custom_form";
+
+    @Getter @Setter 
+    @SerializedName("title")
+    protected String title;
+
+    @Getter
+    @SerializedName("content")
+    protected ArrayList<CustomFormElement> elements = new ArrayList<>();
+
+    @Setter
+    protected transient CustomFormHandler handler;
+
+    @Getter
+    protected transient CustomFormResponse response = null;
+
     protected final transient HashSet<String> containsId = new HashSet<>();
-    @Getter protected transient boolean validated = true;
+
+    @Getter
+    protected transient boolean validated = true;
 
     public CustomForm() {
         this("", null);
     }
 
-    public CustomForm(String name) {
-        this(name, null);
+    public CustomForm(String title) {
+        this(title, null);
     }
 
     public CustomForm(CustomFormHandler handler) {
@@ -65,8 +79,8 @@ public class CustomForm extends CloseableForm {
         Object[] result = new Gson().fromJson(data, Object[].class);
         for (int i = 0; i < elements.size(); i++) {
             CustomFormElement element = elements.get(i);
-            if(!element.respond(result[i])) {
-                this.response = new CustomFormResponse((p, r) -> send(p), elements, containsId, this);
+            if (!element.respond(result[i])) {
+                this.response = new CustomFormResponse((player, response) -> send(player), elements, containsId, this);
                 return;
             }
 
@@ -75,7 +89,7 @@ public class CustomForm extends CloseableForm {
             }
         }
 
-        for(int i = 0; i < elements.size(); i++) elements.get(i).index = i;
+        for (int i = 0; i < elements.size(); i++) elements.get(i).index = i;
 
         this.response = new CustomFormResponse(handler, elements, containsId, this);
     }
@@ -84,5 +98,4 @@ public class CustomForm extends CloseableForm {
         this.setHandler(handler);
         this.send(player);
     }
-
 }
