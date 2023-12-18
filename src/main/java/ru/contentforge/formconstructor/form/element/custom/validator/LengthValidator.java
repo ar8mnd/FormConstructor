@@ -1,4 +1,4 @@
-package ru.contentforge.formconstructor.form.element.validator;
+package ru.contentforge.formconstructor.form.element.custom.validator;
 
 public class LengthValidator extends Validator {
 
@@ -6,13 +6,12 @@ public class LengthValidator extends Validator {
 
     public LengthValidator(String name, int min, int max) {
         super(name);
-
         this.min = min;
         this.max = max;
     }
 
     @Override
     public void validate(String input) {
-        validated = (min == -1 || input.length() >= min) && (max == -1 || max >= input.length());
+        this.validated = (min == -1 || input.length() >= min) && (max == -1 || max >= input.length());
     }
 }

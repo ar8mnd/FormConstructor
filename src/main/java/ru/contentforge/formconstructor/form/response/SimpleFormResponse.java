@@ -1,7 +1,7 @@
 package ru.contentforge.formconstructor.form.response;
 
 import cn.nukkit.Player;
-import ru.contentforge.formconstructor.form.element.Button;
+import ru.contentforge.formconstructor.form.element.simple.Button;
 import ru.contentforge.formconstructor.form.handler.SimpleFormHandler;
 
 public class SimpleFormResponse extends Response<SimpleFormHandler> {

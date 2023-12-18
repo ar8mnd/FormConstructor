@@ -1,4 +1,4 @@
-package ru.contentforge.formconstructor.form.element.validator;
+package ru.contentforge.formconstructor.form.element.custom.validator;
 
 import lombok.Getter;
 

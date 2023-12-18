@@ -1,4 +1,4 @@
-package ru.contentforge.formconstructor.form.element.validator;
+package ru.contentforge.formconstructor.form.element.custom.validator;
 
 public class RegexValidator extends Validator {
 
@@ -6,12 +6,11 @@ public class RegexValidator extends Validator {
 
     public RegexValidator(String name, String regex) {
         super(name);
-
         this.regex = regex;
     }
 
     @Override
     public void validate(String input) {
-        validated = input.matches(regex);
+        this.validated = input.matches(regex);
     }
 }

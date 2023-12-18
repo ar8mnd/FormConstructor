@@ -1,7 +1,7 @@
 package ru.contentforge.formconstructor.form;
 
-import ru.contentforge.formconstructor.form.element.Button;
-import ru.contentforge.formconstructor.form.element.ImageType;
+import ru.contentforge.formconstructor.form.element.simple.Button;
+import ru.contentforge.formconstructor.form.element.simple.ImageType;
 import ru.contentforge.formconstructor.form.handler.NoneHandler;
 import ru.contentforge.formconstructor.form.handler.SimpleFormHandler;
 import ru.contentforge.formconstructor.form.response.SimpleFormResponse;
@@ -94,7 +94,7 @@ public class SimpleForm extends CloseableForm {
             return;
         }
 
-        for (int i = 0; i < buttons.size(); i++) buttons.get(i).index = i;
+        for (int i = 0; i < buttons.size(); i++) buttons.get(i).setIndex(i);
 
         this.response = new SimpleFormResponse(buttons.get(buttonId));
     }

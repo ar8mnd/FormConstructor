@@ -1,9 +1,9 @@
 package ru.contentforge.formconstructor.form;
 
 import cn.nukkit.Player;
-import ru.contentforge.formconstructor.form.element.CustomFormElement;
-import ru.contentforge.formconstructor.form.element.Label;
-import ru.contentforge.formconstructor.form.element.validator.ValidationField;
+import ru.contentforge.formconstructor.form.element.custom.CustomElement;
+import ru.contentforge.formconstructor.form.element.custom.Label;
+import ru.contentforge.formconstructor.form.element.custom.validator.ValidationField;
 import ru.contentforge.formconstructor.form.handler.CustomFormHandler;
 import ru.contentforge.formconstructor.form.response.CustomFormResponse;
 import com.google.gson.annotations.SerializedName;
@@ -27,7 +27,7 @@ public class CustomForm extends CloseableForm {
 
     @Getter
     @SerializedName("content")
-    protected ArrayList<CustomFormElement> elements = new ArrayList<>();
+    protected ArrayList<CustomElement> elements = new ArrayList<>();
 
     @Setter
     protected transient CustomFormHandler handler;
@@ -61,13 +61,13 @@ public class CustomForm extends CloseableForm {
         return addElement(new Label(text));
     }
 
-    public CustomForm addElement(CustomFormElement element) {
+    public CustomForm addElement(CustomElement element) {
         elements.add(element);
         return this;
     }
 
-    public CustomForm addElement(String elementId, CustomFormElement element) {
-        element.elementId = elementId;
+    public CustomForm addElement(String elementId, CustomElement element) {
+        element.setElementId(elementId);
         containsId.add(elementId);
         return addElement(element);
     }
@@ -78,18 +78,18 @@ public class CustomForm extends CloseableForm {
 
         Object[] result = new Gson().fromJson(data, Object[].class);
         for (int i = 0; i < elements.size(); i++) {
-            CustomFormElement element = elements.get(i);
+            CustomElement element = elements.get(i);
             if (!element.respond(result[i])) {
                 this.response = new CustomFormResponse((player, response) -> send(player), elements, containsId, this);
                 return;
             }
 
             if (element instanceof ValidationField) {
-                if (this.validated && !((ValidationField) element).getValidatorResult()) this.validated = false;
+                if (this.validated && !((ValidationField) element).isValidated()) this.validated = false;
             }
         }
 
-        for (int i = 0; i < elements.size(); i++) elements.get(i).index = i;
+        for (int i = 0; i < elements.size(); i++) elements.get(i).setIndex(i);
 
         this.response = new CustomFormResponse(handler, elements, containsId, this);
     }

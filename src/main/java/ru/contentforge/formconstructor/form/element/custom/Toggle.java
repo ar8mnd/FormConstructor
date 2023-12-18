@@ -1,11 +1,14 @@
-package ru.contentforge.formconstructor.form.element;
+package ru.contentforge.formconstructor.form.element.custom;
 
+import ru.contentforge.formconstructor.form.element.ElementType;
 import com.google.gson.annotations.SerializedName;
 
-public class Toggle extends CustomFormElement {
+public class Toggle extends CustomElement {
 
-    @SerializedName("default") protected final boolean defaultValue;
-    protected transient boolean value;
+    @SerializedName("default") 
+    private final boolean defaultValue;
+
+    private transient boolean value;
 
     public Toggle() {
         this("");
@@ -16,8 +19,7 @@ public class Toggle extends CustomFormElement {
     }
 
     public Toggle(String name, boolean defaultValue) {
-        super(name, "toggle");
-
+        super(name, ElementType.TOGGLE);
         this.defaultValue = defaultValue;
     }
 
@@ -32,8 +34,6 @@ public class Toggle extends CustomFormElement {
     @Override
     public boolean respond(Object value) {
         this.value = (boolean) value;
-
         return true;
     }
-
 }

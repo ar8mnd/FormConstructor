@@ -1,0 +1,21 @@
+{
+    "content": [
+        {
+            "default": "",
+            "placeholder": "Name",
+            "text": "Your name",
+            "type": "input"
+        },
+        {
+            "default": 0,
+            "options": [
+                "1",
+                "2"
+            ],
+            "text": "Options",
+            "type": "dropdown"
+        }
+    ],
+    "title": "",
+    "type": "custom_form"
+}

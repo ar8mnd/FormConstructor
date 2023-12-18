@@ -1,12 +1,14 @@
 package ru.contentforge.formconstructor.form.element;
 
 import lombok.Getter;
+import lombok.Setter;
 
+@Getter @Setter
 public class SelectableElement {
 
-    @Getter private final String text;
-    @Getter private final Object value;
-    public int index = -1;
+    private final String text;
+    private final Object value;
+    private int index = -1;
 
     public SelectableElement(String text) {
         this(text, null);
@@ -20,5 +22,4 @@ public class SelectableElement {
     public <T> T getValue(Class<T> clazz) {
         return clazz.cast(value);
     }
-
 }
