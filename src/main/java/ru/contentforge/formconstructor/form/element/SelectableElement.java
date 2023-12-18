@@ -6,16 +6,16 @@ import lombok.Setter;
 @Getter @Setter
 public class SelectableElement {
 
-    private final String text;
+    private final String name;
     private final Object value;
     private int index = -1;
 
-    public SelectableElement(String text) {
-        this(text, null);
+    public SelectableElement(String name) {
+        this(name, null);
     }
 
-    public SelectableElement(String text, Object value) {
-        this.text = text;
+    public SelectableElement(String name, Object value) {
+        this.name = name;
         this.value = value;
     }
 

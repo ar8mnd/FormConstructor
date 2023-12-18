@@ -49,7 +49,7 @@ public class StepSlider extends CustomElement {
     public StepSlider addElement(SelectableElement element) {
         element.setIndex(elements.size());
         elements.add(element);
-        options.add(element.getText());
+        options.add(element.getName());
         return this;
     }
 

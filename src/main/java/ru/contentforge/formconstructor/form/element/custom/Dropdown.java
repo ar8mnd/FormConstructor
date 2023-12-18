@@ -48,7 +48,7 @@ public class Dropdown extends CustomElement {
     public Dropdown addElement(SelectableElement element) {
         element.setIndex(elements.size());
         elements.add(element);
-        options.add(element.getText());
+        options.add(element.getName());
         return this;
     }
 
