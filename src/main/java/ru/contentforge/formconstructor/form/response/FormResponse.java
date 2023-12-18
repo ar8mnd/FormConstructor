@@ -1,19 +1,19 @@
 package ru.contentforge.formconstructor.form.response;
 
 import cn.nukkit.Player;
-import cn.nukkit.form.response.FormResponse;
 import ru.contentforge.formconstructor.form.handler.FormHandler;
+import lombok.Getter;
 
-public abstract class Response<T extends FormHandler> extends FormResponse {
+@Getter
+public abstract class FormResponse<T extends FormHandler> extends cn.nukkit.form.response.FormResponse {
 
-    protected final String data;
-    protected final T handler;
+    private final T handler;
+    private final String data;
 
-    public Response(T handler, String data) {
+    public FormResponse(T handler, String data) {
         this.handler = handler;
         this.data = data;
     }
 
     public abstract void handle(Player player);
-
 }

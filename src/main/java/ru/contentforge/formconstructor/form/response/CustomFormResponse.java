@@ -15,10 +15,12 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class CustomFormResponse extends Response<CustomFormHandler> {
+public class CustomFormResponse extends FormResponse<CustomFormHandler> {
 
-    protected final @Getter CustomForm form;
+    @Getter
+    protected final CustomForm form;
     protected final List<CustomElement> elements;
 
     public CustomFormResponse(CustomFormHandler handler, List<CustomElement> elements, CustomForm form) {
@@ -27,115 +29,117 @@ public class CustomFormResponse extends Response<CustomFormHandler> {
         this.form = form;
     }
 
-    public CustomElement get(int index) {
-        return elements.get(index);
-    }
-
-    public CustomElement get(String elementId) {
-        for (CustomElement element: elements) {
-            if (elementId.equals(element.getElementId())) return element;
-        }
-        return null;
-    }
-
     public boolean containsId(String elementId) {
         return elements.stream().anyMatch(element -> elementId.equals(element.getElementId()));
     }
 
-    public <T extends CustomElement> T get(String elementId, Class<T> clazz) {
-        return clazz.cast(get(elementId));
+    public CustomElement getElement(int index) {
+        return elements.get(index);
     }
 
-    public <T extends CustomElement> List<T> get(Class<T> clazz) {
-        List<T> list = new ArrayList<>();
-        for (CustomElement element: elements) {
-            if (clazz.isInstance(element)) list.add(clazz.cast(element));
-        }
-        return list;
+    public CustomElement getElement(String elementId) {
+        return elements.stream()
+            .filter(element -> elementId.equals(element.getElementId()))
+            .findFirst()
+            .orElse(null);
+    }
+
+    public <T extends CustomElement> T getElement(String elementId, Class<T> clazz) {
+        return clazz.cast(getElement(elementId));
+    }
+
+    public <T extends CustomElement> List<T> getElements(Class<T> clazz) {
+        return elements.stream()
+            .filter(clazz::isInstance)
+            .map(clazz::cast)
+            .collect(Collectors.toList());
     }
 
     public Label getLabel(int index) {
-        return (Label) elements.get(index);
+        return (Label) getElement(index);
     }
 
     public Label getLabel(String elementId) {
-        return get(elementId, Label.class);
+        return getElement(elementId, Label.class);
     }
 
     public List<Label> getLabels() {
-        return get(Label.class);
+        return getElements(Label.class);
     }
 
     public Input getInput(int index) {
-        return (Input) elements.get(index);
+        return (Input) getElement(index);
     }
 
     public Input getInput(String elementId) {
-        return get(elementId, Input.class);
+        return getElement(elementId, Input.class);
     }
 
     public List<Input> getInputs() {
-        return get(Input.class);
+        return getElements(Input.class);
     }
 
     public Toggle getToggle(int index) {
-        return (Toggle) elements.get(index);
+        return (Toggle) getElement(index);
     }
 
     public Toggle getToggle(String elementId) {
-        return get(elementId, Toggle.class);
+        return getElement(elementId, Toggle.class);
     }
 
     public List<Toggle> getToggles() {
-        return get(Toggle.class);
+        return getElements(Toggle.class);
     }
 
     public StepSlider getStepSlider(int index) {
-        return (StepSlider) elements.get(index);
+        return (StepSlider) getElement(index);
     }
 
     public StepSlider getStepSlider(String elementId) {
-        return get(elementId, StepSlider.class);
+        return getElement(elementId, StepSlider.class);
     }
 
     public List<StepSlider> getStepSliders() {
-        return get(StepSlider.class);
+        return getElements(StepSlider.class);
     }
 
     public Dropdown getDropdown(int index) {
-        return (Dropdown) elements.get(index);
+        return (Dropdown) getElement(index);
     }
 
     public Dropdown getDropdown(String elementId) {
-        return get(elementId, Dropdown.class);
+        return getElement(elementId, Dropdown.class);
     }
 
     public List<Dropdown> getDropdowns() {
-        return get(Dropdown.class);
+        return getElements(Dropdown.class);
     }
 
     @Override
     public void handle(Player player) {
-        if (handler == null) return;
-        handler.handle(player, this);
+        if (this.getHandler() != null) {
+            this.getHandler().handle(player, this);
+        }
     }
-
+    
     public boolean isValidated() {
         return form.isValidated();
     }
 
     public List<String> getValidatorErrors() {
         List<String> errors = new ArrayList<>();
-
-        for (CustomElement el : elements) {
-            if (!(el instanceof ValidationField)) continue;
-
-            ValidationField validationField = (ValidationField) el;
-            for (Validator validator : validationField.getValidators()) {
-                if (validator.isValidated()) continue;
-                errors.add(validator.getName());
+    
+        for (CustomElement element : elements) {
+            if (element instanceof ValidationField) {
+                ValidationField validationField = (ValidationField) element;
+                for (Validator validator : validationField.getValidators()) {
+                    if (!validator.isValidated()) {
+                        errors.add(validator.getName());
+                    }
+                }
             }
         }
+    
         return errors;
     }
 }

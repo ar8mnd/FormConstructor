@@ -3,7 +3,7 @@ package ru.contentforge.formconstructor.form.response;
 import cn.nukkit.Player;
 import ru.contentforge.formconstructor.form.handler.ModalFormHandler;
 
-public class ModalFormResponse extends Response<ModalFormHandler> {
+public class ModalFormResponse extends FormResponse<ModalFormHandler> {
 
     public ModalFormResponse(ModalFormHandler handler, String data) {
         super(handler, data);
@@ -11,7 +11,9 @@ public class ModalFormResponse extends Response<ModalFormHandler> {
 
     @Override
     public void handle(Player player) {
-        if (handler == null) return;
-        handler.handle(player, data.equals("true"));
+        if (this.getHandler() != null) {
+            this.getHandler().handle(player, 
+            this.getData().equals("true"));
+        }
     }
 }
