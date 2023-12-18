@@ -65,7 +65,7 @@ public class Input extends CustomElement implements ValidationField {
 
     @Override
     public void validate() {
-        for (Validator validator: validators) validator.validate(value);
+        validators.forEach(validator -> validator.validate(value));
     }
 
     @Override

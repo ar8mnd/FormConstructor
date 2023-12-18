@@ -6,8 +6,8 @@ import lombok.Getter;
 @Getter
 public class ButtonImage {
 
-    @SerializedName("type") private ImageType type;
-    @SerializedName("data") private String path;
+    @SerializedName("type") private final ImageType type;
+    @SerializedName("data") private final String path;
 
     public ButtonImage() {
         this(ImageType.PATH, "");

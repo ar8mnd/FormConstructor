@@ -10,7 +10,7 @@ import ru.contentforge.formconstructor.task.FormHandlingTask;
 
 public class FormListener implements Listener {
  
-    private FormConstructor main;
+    private final FormConstructor main;
 
     public FormListener(FormConstructor main) {
         this.main = main;
@@ -18,10 +18,11 @@ public class FormListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onFormResponded(PlayerFormRespondedEvent event) {
-        if (!(event.getWindow() instanceof Form)) return;
+        if (!(event.getWindow() instanceof Form form)) {
+            return;
+        }
 
-        Form form = (Form) event.getWindow();
-        FormHandlingTask handler = new FormHandlingTask(event.getResponse(), (Form) event.getWindow(), event.getPlayer());
+        FormHandlingTask handler = new FormHandlingTask(event.getResponse(), form, event.getPlayer());
 
         if (form.isAsync()) {
             main.getServer().getScheduler().scheduleAsyncTask(main, handler);

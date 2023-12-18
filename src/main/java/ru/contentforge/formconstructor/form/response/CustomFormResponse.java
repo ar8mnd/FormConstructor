@@ -129,17 +129,16 @@ public class CustomFormResponse extends FormResponse<CustomFormHandler> {
     public List<String> getValidatorErrors() {
         List<String> errors = new ArrayList<>();
     
-        for (CustomElement element : elements) {
-            if (element instanceof ValidationField) {
-                ValidationField validationField = (ValidationField) element;
+        elements.forEach(element -> {
+            if (element instanceof ValidationField validationField) {
                 for (Validator validator : validationField.getValidators()) {
                     if (!validator.isValidated()) {
                         errors.add(validator.getName());
                     }
                 }
             }
-        }
-    
+        });
+
         return errors;
     }
 }
