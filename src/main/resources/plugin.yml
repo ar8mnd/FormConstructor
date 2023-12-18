@@ -3,4 +3,4 @@ version: "${project.version}"
 api: ["1.0.13"]
 author: qPexLegendary
 description: "Library for easy creating and handling of forms"
-main: ru.contentforge.formconstructor.FormConstructor
+main: com.formconstructor.FormConstructor
