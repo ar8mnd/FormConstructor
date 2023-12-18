@@ -6,7 +6,11 @@ import lombok.Getter;
 @Getter
 public abstract class CloseableForm extends Form {
 
-    protected transient NoneHandler noneHandler = null;
+    public CloseableForm(FormType type) {
+        super(type);
+    }
+
+    private transient NoneHandler noneHandler;
 
     public CloseableForm setNoneHandler(NoneHandler noneHandler) {
         this.noneHandler = noneHandler;

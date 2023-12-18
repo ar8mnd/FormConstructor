@@ -4,20 +4,22 @@ import cn.nukkit.Player;
 import ru.contentforge.formconstructor.form.handler.ModalFormHandler;
 import ru.contentforge.formconstructor.form.response.ModalFormResponse;
 import com.google.gson.annotations.SerializedName;
-import lombok.experimental.Accessors;
 import lombok.Getter;
-import lombok.Setter;
 
-@Accessors(chain = true)
+@Getter
 public class ModalForm extends CloseableForm {
 
-    @SerializedName("type") private final String type = "modal";
-    @Getter @Setter @SerializedName("title") protected String title;
-    @Getter @Setter @SerializedName("content") protected String content;
-    @Getter @Setter @SerializedName("button1") protected String positiveButton;
-    @Getter @Setter @SerializedName("button2") protected String negativeButton;
-    @Setter protected transient ModalFormHandler handler;
-    @Getter protected transient ModalFormResponse response = null;
+    private String title;
+    private String content;
+    
+    @SerializedName("button1") 
+    private String positiveButton;
+    
+    @SerializedName("button2")
+    private String negativeButton;
+    
+    private transient ModalFormHandler handler;
+    private transient ModalFormResponse response;
 
     public ModalForm() {
         this("");
@@ -28,11 +30,7 @@ public class ModalForm extends CloseableForm {
     }
 
     public ModalForm(String title, String content) {
-        this(title, content, "");
-    }
-
-    public ModalForm(String title, String content, String positiveButton) {
-        this(title, content, positiveButton, "");
+        this(title, content, "", "");
     }
 
     public ModalForm(String title, String content, String positiveButton, String negativeButton) {
@@ -40,6 +38,7 @@ public class ModalForm extends CloseableForm {
     }
 
     public ModalForm(String title, String content, String positiveButton, String negativeButton, ModalFormHandler handler) {
+        super(FormType.MODAL);
         this.title = title;
         this.content = content;
         this.positiveButton = positiveButton;
@@ -47,16 +46,41 @@ public class ModalForm extends CloseableForm {
         this.handler = handler;
     }
 
-    public ModalForm addContent(String addition) {
+    public ModalForm setTitle(String title){
+        this.title = title;
+        return this;
+    }
+
+    public ModalForm setContent(String content){
+        this.content = content;
+        return this;
+    }
+
+    public ModalForm addContent(String addition){
         this.content += addition;
+        return this;
+    }
+
+    public ModalForm setPositiveButton(String text){
+        this.positiveButton = text;
+        return this;
+    }
+
+    public ModalForm setNegativeButton(String text){
+        this.negativeButton = text;
+        return this;
+    }
+
+    public ModalForm setHandler(ModalFormHandler handler){
+        this.handler = handler;
         return this;
     }
 
     @Override
     public void setResponse(String data) {
-        if (data.equals("null") || handler == null) return;
-
-        this.response = new ModalFormResponse(handler, data);
+        if (!data.equals("null") && handler != null) {
+            this.response = new ModalFormResponse(handler, data);
+        }
     }
 
     public void send(Player player, ModalFormHandler handler) {

@@ -9,36 +9,23 @@ import ru.contentforge.formconstructor.form.response.CustomFormResponse;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.Gson;
 import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.List;
 
-@Accessors(chain = true)
+@Getter
 public class CustomForm extends CloseableForm {
 
-    @SerializedName("type")
-    protected final String type = "custom_form";
+    private String title;
 
-    @Getter @Setter 
-    @SerializedName("title")
-    protected String title;
-
-    @Getter
     @SerializedName("content")
-    protected ArrayList<CustomElement> elements = new ArrayList<>();
-
-    @Setter
-    protected transient CustomFormHandler handler;
+    private List<CustomElement> elements = new ArrayList<>();
 
     @Getter
-    protected transient CustomFormResponse response = null;
+    private transient boolean validated = true;
 
-    protected final transient HashSet<String> containsId = new HashSet<>();
-
-    @Getter
-    protected transient boolean validated = true;
+    private transient CustomFormHandler handler;
+    private transient CustomFormResponse response;
 
     public CustomForm() {
         this("", null);
@@ -53,45 +40,61 @@ public class CustomForm extends CloseableForm {
     }
 
     public CustomForm(String title, CustomFormHandler handler) {
+        super(FormType.CUSTOM);
         this.title = title;
         this.handler = handler;
     }
 
-    public CustomForm addElement(String text) {
+    public CustomForm setTitle(String title){
+        this.title = title;
+        return this;
+    }
+
+    public CustomForm addElement(String text){
         return addElement(new Label(text));
     }
 
-    public CustomForm addElement(CustomElement element) {
+    public CustomForm addElement(CustomElement element){
         elements.add(element);
         return this;
     }
 
     public CustomForm addElement(String elementId, CustomElement element) {
         element.setElementId(elementId);
-        containsId.add(elementId);
         return addElement(element);
+    }
+
+    public CustomForm setHandler(CustomFormHandler handler){
+        this.handler = handler;
+        return this;
     }
 
     @Override
     public void setResponse(String data) {
-        if (data.equals("null")) return;
+        if (data.equals("null")) {
+            return;
+        }
 
         Object[] result = new Gson().fromJson(data, Object[].class);
+
         for (int i = 0; i < elements.size(); i++) {
             CustomElement element = elements.get(i);
+
             if (!element.respond(result[i])) {
-                this.response = new CustomFormResponse((player, response) -> send(player), elements, containsId, this);
+                this.response = new CustomFormResponse((player, response) -> send(player), elements, this);
                 return;
             }
 
-            if (element instanceof ValidationField) {
-                if (this.validated && !((ValidationField) element).isValidated()) this.validated = false;
+            if (element instanceof ValidationField && this.validated && !((ValidationField) element).isValidated()) {
+                this.validated = false;
             }
         }
 
-        for (int i = 0; i < elements.size(); i++) elements.get(i).setIndex(i);
+        for (int index = 0; index < elements.size(); index++) {
+            elements.get(index).setIndex(index);
+        }
 
-        this.response = new CustomFormResponse(handler, elements, containsId, this);
+        this.response = new CustomFormResponse(handler, elements, this);
     }
 
     public void send(Player player, CustomFormHandler handler) {

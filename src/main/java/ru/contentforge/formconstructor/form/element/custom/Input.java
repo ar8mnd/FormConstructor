@@ -16,7 +16,7 @@ public class Input extends CustomElement implements ValidationField {
     private String placeholder;
 
     @SerializedName("default")
-    protected String defaultValue;
+    private String defaultValue;
 
     private transient String value;
 

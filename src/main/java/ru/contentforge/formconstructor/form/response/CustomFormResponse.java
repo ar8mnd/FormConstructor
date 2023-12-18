@@ -14,19 +14,16 @@ import ru.contentforge.formconstructor.form.handler.CustomFormHandler;
 import lombok.Getter;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class CustomFormResponse extends Response<CustomFormHandler> {
 
     protected final @Getter CustomForm form;
-    protected final ArrayList<CustomElement> elements;
-    protected final HashSet<String> containsId;
+    protected final List<CustomElement> elements;
 
-    public CustomFormResponse(CustomFormHandler handler, ArrayList<CustomElement> elements, HashSet<String> containsId, CustomForm form) {
+    public CustomFormResponse(CustomFormHandler handler, List<CustomElement> elements, CustomForm form) {
         super(handler, "");
         this.elements = elements;
-        this.containsId = containsId;
         this.form = form;
     }
 
@@ -42,7 +39,7 @@ public class CustomFormResponse extends Response<CustomFormHandler> {
     }
 
     public boolean containsId(String elementId) {
-        return containsId.contains(elementId);
+        return elements.stream().anyMatch(element -> elementId.equals(element.getElementId()));
     }
 
     public <T extends CustomElement> T get(String elementId, Class<T> clazz) {
@@ -50,7 +47,7 @@ public class CustomFormResponse extends Response<CustomFormHandler> {
     }
 
     public <T extends CustomElement> List<T> get(Class<T> clazz) {
-        ArrayList<T> list = new ArrayList<>();
+        List<T> list = new ArrayList<>();
         for (CustomElement element: elements) {
             if (clazz.isInstance(element)) list.add(clazz.cast(element));
         }
@@ -127,8 +124,8 @@ public class CustomFormResponse extends Response<CustomFormHandler> {
         return form.isValidated();
     }
 
-    public ArrayList<String> getValidatorErrors() {
-        ArrayList<String> errors = new ArrayList<>();
+    public List<String> getValidatorErrors() {
+        List<String> errors = new ArrayList<>();
 
         for (CustomElement el : elements) {
             if (!(el instanceof ValidationField)) continue;

@@ -9,10 +9,15 @@ import lombok.Getter;
 @Getter
 public abstract class Form extends FormWindow {
 
-    protected transient boolean async;
+    private final FormType type;
+    private transient boolean async;
+
+    public Form(FormType type) {
+        this.type = type;
+    }
 
     public void send(Player player) {
-        this.send(player, false);
+        send(player, false);
     }
 
     public void send(Player player, boolean async) {
@@ -26,6 +31,6 @@ public abstract class Form extends FormWindow {
     }
 
     public void sendAsync(Player player) {
-        this.send(player, true);
+        send(player, true);
     }
 }
