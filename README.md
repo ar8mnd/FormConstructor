@@ -143,7 +143,8 @@ public void onFormSend(PlayerFormSendEvent event) {
 }
 ```
 
-## Maven
+🔌 Maven
+-------------
 
 #### Repository
 
