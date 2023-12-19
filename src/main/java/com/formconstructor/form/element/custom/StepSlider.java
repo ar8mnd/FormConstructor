@@ -43,28 +43,28 @@ public class StepSlider extends CustomElement {
     public StepSlider(String name, List<SelectableElement> elements, int defaultIndex) {
         super(name, ElementType.STEP_SLIDER);
         this.defaultIndex = defaultIndex;
-        this.addElements(elements);
+        this.addSteps(elements);
     }
 
-    public StepSlider addElement(SelectableElement element) {
+    public StepSlider addStep(SelectableElement element) {
         element.setIndex(elements.size());
         elements.add(element);
         options.add(element.getName());
         return this;
     }
 
-    public StepSlider addElement(String name, Object value) {
-        addElement(new SelectableElement(name, value));
+    public StepSlider addStep(String name, Object value) {
+        addStep(new SelectableElement(name, value));
         return this;
     }
 
-    public StepSlider addElement(String name) {
-        addElement(name, null);
+    public StepSlider addStep(String name) {
+        addStep(name, null);
         return this;
     }
 
-    public StepSlider addElements(Collection<SelectableElement> elements) {
-        elements.forEach(this::addElement);
+    public StepSlider addSteps(Collection<SelectableElement> elements) {
+        elements.forEach(this::addStep);
         return this;
     }
 
