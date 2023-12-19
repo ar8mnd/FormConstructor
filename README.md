@@ -1,110 +1,149 @@
 ![logo by @tolimag](.github/logo.png)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.1.3-brightgreen)](https://github.com/ContentForge/FormConstructor/releases/tag/1.1.3)
+[![Version](https://img.shields.io/badge/version-2.0.0-brightgreen)](https://github.com/ContentForge/FormConstructor/releases/tag/1.1.3)
 [![CloudBurst](https://img.shields.io/badge/CloudBurst-1.1.2-brightgreen)](https://cloudburstmc.org/resources/formconstructor.738/)
 
-Introduction
+> [!IMPORTANT]
+> The current version of FormConstructor plugin is 2.0.0, if your plugin does not support this version you can download FormConstructor version 1.1.4 from the link below:         
+> [Download FormConstructor 1.1.4](https://github.com/MEFRREEX/FormConstructor/tree/1.1.4)
+
+🤔 Introduction
 ------------- 
 
 Library is designed to simplify the creation and handling of forms.
 It has a few key advantages over other  form libraries:
 
 - Forms are processed using a lambda, which is passed when the form itself is created, and not by catching events.
-- For each button we can set a lambda function in SimpleForm.
-- In SimpleForm we get a button object as a response, where we can get its text and index.
+- For each button in SimpleForm we can set a lambda function.
+- In SimpleForm we get a button object as a response, where we can get its name and index.
 - In CustomForm we can mark elements with an identifier to conveniently get this element in its handler. We can get element by id and its index.
+- For each form we can set its closing handler.
 - Easy async handling.
 
-Examples
+🛠 Examples
 -------------
 
-For SimpleForm:
+Creating a SimpleForm:
+
 ```java
 SimpleForm form = new SimpleForm("Sample title");
+// Adding form content
+form.addContent("New content line");
+    
+// Easiest way to add a button
+form.addButton("Button", (pl, b) -> {
+        pl.sendMessage("Button clicked: " + b.getName() + " (" + b.getIndex() + ")");
+    })
+    // Button with image
+    .addButton("Button with image", ImageType.PATH, "textures/items/diamond")
+    // Another way to add a button
+    .addButton(new Button("Another button")
+        .setImage(ImageType.PATH, "textures/blocks/stone")
+        .onClick((pl, b) -> {
+            pl.sendMessage("Another button clicked: " + b.getName() + " (" + b.getIndex() + ")");
+        }));
 
-SimpleFormHandler handler = (p, button) -> {
-    p.sendMessage("Your selected button is " + button.getName());
-    p.sendMessage("Its index - " + button.index);
-};
-
-form.setContent("This is a text")
-    .addContent("\nThis is addition :3")
-    .addButton("Test button", handler)
-    .addButton("Same button but with image", ImageType.PATH, "textures/items/diamond", handler)
-    .addButton("Button without handler");
-
-//We can set handler for null result
-form.setNoneHandler(p -> {
-    p.sendMessage("Why you closed this form? :c");
+// Setting the form close handler
+form.setNoneHandler(pl -> {
+    pl.sendMessage("You closed the form!");
 });
 
 form.send(player);
-/* 
- * Also we can use `player.showFormWindow(form);` but it isn't comfortable
- * When using `player.showFormWindow(form);` the PlayerFormSendEvent event will not be called
- */
 ```
 
-For ModalForm:
+Creating a ModalForm:
 
 ```java
 ModalForm form = new ModalForm("Test modal form");
+form.addContent("New content line");
 
-form.setContent("Is OneKN gay?") //local meme in RuNukkitDev
-    .setPositiveButton("Yes")
-    .setNegativeButton("Sure");
+form.setPositiveButton("Positive button")
+    .setNegativeButton("Negative button");
 
-form.setNoneHandler(p -> {
-    p.sendMessage("Why you closed this form? :c");
+// Setting the form handler
+// Result returns true if a positive button was ckicked and false if a negative button was ckicked
+form.setHandler((pl, result) -> {
+    pl.sendMessage("You clicked " + (result ? "correct" : "wrong") + " button!");
 });
 
-form.setHandler((p, result) -> {
-    p.sendMessage(result? "I knew it!" : "Quite right :D");
+// Setting the form close handler
+form.setNoneHandler(pl -> pl.sendMessage("You closed the form!"));
+form.send(player);
+```
+
+Creating a CustomForm:
+
+```java
+CustomForm form = new CustomForm("Test custom form");
+
+// Options list 
+List<SelectableElement> elements = List.of(
+    new SelectableElement("Option 1"),
+    new SelectableElement("Option 2"),
+    // SelectableElement may be named and may contain a value
+    new SelectableElement("Option with value", 15)
+);
+
+form.addElement("Test label")
+    .addElement("input", new Input("Input")
+        .setPlaceholder("Text")
+        .setDefaultValue("Default value"))
+    .addElement("slider", new Slider("Slider", 1f, 100f, 1, 1))
+    .addElement("stepslider", new StepSlider("Step slider")
+        .addStep("1")
+        .addStep("2")
+        .addStep("3"))
+    .addElement("dropdown", new Dropdown("Dropdown")
+        .addElement("Element 1")
+        .addElement("Element 2")
+        .addElement("Element 3"))
+    .addElement("dropdown1", new Dropdown("Second dropdown", elements))
+    .addElement("toggle", new Toggle("Toggle"));
+
+// Setting the form handler
+form.setHandler((pl, response) -> {
+    String input = response.getInput("input").getValue();
+
+    float slider = response.getSlider("slider").getValue();
+    SelectableElement stepslider = response.getStepSlider("stepslider").getValue();
+    SelectableElement dropdown = response.getDropdown("dropdown").getValue();
+
+    // Getting the value we set in SelectableElement
+    Integer dropdownValue = response.getDropdown("dropdown1").getValue().getValue(Integer.class);
+
+    boolean toggle = response.getToggle("toggle").getValue();
+
+    pl.sendMessage("Input: " + input + ", Slider: " + slider + ", Step Slider: " + stepslider + ", Dropdown: " + dropdown + ", Toggle: " + toggle);
+    pl.sendMessage("Second dropdown value: " + dropdownValue);
 });
 
 form.send(player);
 ```
 
-For CustomForm:
-
-```java
-CustomForm form = new CustomForm("Sample custom form");
-
-List<SelectableElement> elements = Arrays.asList(
-    new SelectableElement("Option 1"),
-    new SelectableElement("Option 2 but with value", 42),
-    new SelectableElement("Option 3")
-);
-
-form.addElement(new Label("This is a test"))
-    .addElement("Easy way to add a label")
-    .addElement("my-text", Input.builder().setName("A sample input").build())
-    .addElement("my-toggle", new Toggle("Toggle?", true))
-    .addElement("my-dd", new Dropdown("Dropdown",  elements))
-    .addElement(new Dropdown("Dropdown with default value", elements, 1))
-    .addElement("my-ss", new StepSlider("Step slider", elements, 2));
-
-form.setHandler((p, response) -> {
-    //We can get by id and index
-    p.sendMessage(response.getInput("my-text").getValue());
-    p.sendMessage(response.getInput(1).getValue()); //It's bad method
-    p.sendMessage(response.getToggle("my-toggle").getValue());
-    
-    SelectableElement el = response.getDropdown("my-dd").getValue();
-    p.sendMessage(el.getText());
-    if(el.getValue() != null) p.sendMessage(el.getValue(Integer.class));
-    
-    el = response.getStepSlider("my-ss").getValue();
-    p.sendMessage(el.getText());
-});
-```
-
 ### Async handling
-Also you can use method `sendAsync(Player)` for using async form handling.
+Also you can use method `sendAsync(player)` or `send(player, true)` for using async form handling.
 But this may cause some restrictions. What exactly - I don't know.
 
-Donate
+📋 Events
+-------------
+| Name                 | Cancellable | Description                      |
+|----------------------|-------------|----------------------------------|
+| PlayerFormSendEvent  | true        | Called when a form is sent       |
+| PlayerFormCloseEvent | false       | Called when the form is closed   |
+
+Example:
+```java
+@EventHandler
+public void onFormSend(PlayerFormSendEvent event) {
+    // Getting a player
+    Player player = event.getPlayer();
+    // Getting the form
+    Form form = event.getForm();
+}
+```
+
+💰 Donate
 -------------
 
 - [DonationAlerts](https://www.donationalerts.com/r/qpexlegendary)
