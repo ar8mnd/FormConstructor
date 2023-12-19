@@ -32,8 +32,8 @@ public class Toggle extends CustomElement {
     }
 
     @Override
-    public boolean respond(Object value) {
-        this.value = (boolean) value;
+    public boolean respond(Object data) {
+        this.value = (boolean) data;
         return true;
     }
 }

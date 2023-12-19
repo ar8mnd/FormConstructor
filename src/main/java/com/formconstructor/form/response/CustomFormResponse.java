@@ -9,6 +9,7 @@ import com.formconstructor.form.element.custom.CustomElement;
 import com.formconstructor.form.element.custom.Dropdown;
 import com.formconstructor.form.element.custom.Input;
 import com.formconstructor.form.element.custom.Label;
+import com.formconstructor.form.element.custom.Slider;
 import com.formconstructor.form.element.custom.StepSlider;
 import com.formconstructor.form.element.custom.Toggle;
 import lombok.Getter;
@@ -144,6 +145,32 @@ public class CustomFormResponse extends FormResponse<CustomFormHandler> {
      */
     public List<Toggle> getToggles() {
         return getElements(Toggle.class);
+    }
+
+    /**
+     * Get Slider by index
+     * @param index Slider index
+     * @return Slider
+     */
+    public Slider getSlider(int index) {
+        return (Slider) getElement(index);
+    }
+
+    /**
+     * Get Slider by element id
+     * @param elementId Slider identifier
+     * @return Slider
+     */
+    public Slider getSlider(String elementId) {
+        return getElement(elementId, Slider.class);
+    }
+
+    /**
+     * Get all sliders
+     * @return List<Slider>
+     */
+    public List<Slider> getSliders() {
+        return getElements(Slider.class);
     }
 
     /**

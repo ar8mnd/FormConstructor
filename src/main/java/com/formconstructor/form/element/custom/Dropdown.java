@@ -79,8 +79,8 @@ public class Dropdown extends CustomElement {
     }
 
     @Override
-    public boolean respond(Object value) {
-        this.selectedIndex = ((Double) value).intValue();
+    public boolean respond(Object data) {
+        this.selectedIndex = ((Double) data).intValue();
         return !(elements.isEmpty() || selectedIndex < 0 || selectedIndex >= elements.size());
     }
 }

@@ -90,8 +90,8 @@ public class Input extends CustomElement implements ValidationField {
     }
 
     @Override
-    public boolean respond(Object value) {
-        this.value = trim ? ((String) value).trim() : (String) value;
+    public boolean respond(Object data) {
+        this.value = trim ? ((String) data).trim() : (String) data;
         this.validate();
         return true;
     }

@@ -82,8 +82,8 @@ public class StepSlider extends CustomElement {
     }
 
     @Override
-    public boolean respond(Object value) {
-        selectedIndex = ((Double) value).intValue();
+    public boolean respond(Object data) {
+        this.selectedIndex = ((Double) data).intValue();
 
         if (elements.isEmpty() || selectedIndex < 0 || (elements.size() == 1 && selectedIndex == 1)) {
             return true;

@@ -13,7 +13,7 @@ public class Label extends CustomElement {
     }
 
     @Override
-    public boolean respond(Object value) {
+    public boolean respond(Object data) {
         return true;
     }
 }
