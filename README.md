@@ -27,16 +27,16 @@ SimpleForm form = new SimpleForm("Sample title");
 form.addContent("New content line");
     
 // Easiest way to add a button
-form.addButton("Button 1", (pl, b) -> {
-        pl.sendMessage("Button 1 clicked: " + b.getName() + " (" + b.getIndex() + ")");
+form.addButton("Button", (pl, b) -> {
+        pl.sendMessage("Button clicked: " + b.getName() + " (" + b.getIndex() + ")");
     })
     // Button with image
     .addButton("Button with image", ImageType.PATH, "textures/items/diamond")
     // Another way to add a button
-    .addButton(new Button("Button 2")
+    .addButton(new Button("Another button")
         .setImage(ImageType.PATH, "textures/blocks/stone")
         .onClick((pl, b) -> {
-            pl.sendMessage("Button 2 clicked: " + b.getName() + " (" + b.getIndex() + ")");
+            pl.sendMessage("Another button clicked: " + b.getName() + " (" + b.getIndex() + ")");
         }));
 
 // Setting the form close handler
