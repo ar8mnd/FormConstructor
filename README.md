@@ -1,7 +1,7 @@
 ![logo by @tolimag](.github/logo.png)
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.0.0-brightgreen)](https://github.com/ContentForge/FormConstructor/releases/tag/1.1.3)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-2.0.0-brightgreen)](https://github.com/ContentForge/FormConstructor/releases/tag/1.1.3)
 [![CloudBurst](https://img.shields.io/badge/CloudBurst-1.1.2-brightgreen)](https://cloudburstmc.org/resources/formconstructor.738/)
 
 > [!IMPORTANT]
@@ -141,6 +141,28 @@ public void onFormSend(PlayerFormSendEvent event) {
     // Getting the form
     Form form = event.getForm();
 }
+```
+
+## Maven
+
+#### Repository
+
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
+
+#### Dependency
+```xml
+<dependency>
+    <groupId>com.github.IWareQ</groupId>
+    <artifactId>FakeInventories</artifactId>
+    <version>Version</version>
+</dependency>
 ```
 
 💰 Donate
