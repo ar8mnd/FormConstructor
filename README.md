@@ -15,9 +15,10 @@ Library is designed to simplify the creation and handling of forms.
 It has a few key advantages over other  form libraries:
 
 - Forms are processed using a lambda, which is passed when the form itself is created, and not by catching events.
-- For each button we can set a lambda function in SimpleForm.
-- In SimpleForm we get a button object as a response, where we can get its text and index.
+- For each button in SimpleForm we can set a lambda function.
+- In SimpleForm we get a button object as a response, where we can get its name and index.
 - In CustomForm we can mark elements with an identifier to conveniently get this element in its handler. We can get element by id and its index.
+- For each form we can set its closing handler.
 - Easy async handling.
 
 🛠 Examples
@@ -121,6 +122,24 @@ form.send(player);
 ### Async handling
 Also you can use method `sendAsync(player)` or `send(player, true)` for using async form handling.
 But this may cause some restrictions. What exactly - I don't know.
+
+📋 Events
+-------------
+| Name                 | Cancellable | Description                      |
+|----------------------|-------------|----------------------------------|
+| PlayerFormSendEvent  | true        | Called when a form is sent       |
+| PlayerFormCloseEvent | false       | Called when the form is closed   |
+
+Example:
+```java
+@EventHandler
+public void onFormSend(PlayerFormSendEvent event) {
+    // Getting a player
+    Player player = event.getPlayer();
+    // Getting the form
+    Form form = event.getForm();
+}
+```
 
 💰 Donate
 -------------
