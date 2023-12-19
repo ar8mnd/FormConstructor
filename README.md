@@ -159,9 +159,9 @@ public void onFormSend(PlayerFormSendEvent event) {
 #### Dependency
 ```xml
 <dependency>
-    <groupId>com.github.IWareQ</groupId>
-    <artifactId>FakeInventories</artifactId>
-    <version>Version</version>
+    <groupId>com.github.MEFRREEX</groupId>
+    <artifactId>FormConstructor</artifactId>
+    <version>2.0.0</version>
 </dependency>
 ```
 
