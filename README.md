@@ -89,10 +89,11 @@ form.addElement("Test label")
     .addElement("input", new Input("Input")
         .setPlaceholder("Text")
         .setDefaultValue("Default value"))
-    .addElement("slider", new StepSlider("Step slider")
-        .addElement("1")
-        .addElement("2")
-        .addElement("3"))
+    .addElement("slider", new Slider("Slider", 1f, 100f, 1, 1))
+    .addElement("stepslider", new StepSlider("Step slider")
+        .addStep("1")
+        .addStep("2")
+        .addStep("3"))
     .addElement("dropdown", new Dropdown("Dropdown")
         .addElement("Element 1")
         .addElement("Element 2")
@@ -104,7 +105,8 @@ form.addElement("Test label")
 form.setHandler((pl, response) -> {
     String input = response.getInput("input").getValue();
 
-    SelectableElement slider = response.getStepSlider("slider").getValue();
+    float slider = response.getSlider("slider").getValue();
+    SelectableElement stepslider = response.getStepSlider("stepslider").getValue();
     SelectableElement dropdown = response.getDropdown("dropdown").getValue();
 
     // Getting the value we set in SelectableElement
@@ -112,7 +114,7 @@ form.setHandler((pl, response) -> {
 
     boolean toggle = response.getToggle("toggle").getValue();
 
-    pl.sendMessage("Input: " + input + ", Slider: " + slider + ", Dropdown: " + dropdown + ", Toggle: " + toggle);
+    pl.sendMessage("Input: " + input + ", Slider: " + slider + ", Step Slider: " + stepslider + ", Dropdown: " + dropdown + ", Toggle: " + toggle);
     pl.sendMessage("Second dropdown value: " + dropdownValue);
 });
 
