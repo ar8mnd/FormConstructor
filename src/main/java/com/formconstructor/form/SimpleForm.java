@@ -48,47 +48,103 @@ public class SimpleForm extends CloseableForm {
         }
     }
 
+    /**
+     * Set form title
+     * @param title Text
+     * @return SimpleForm
+     */
     public SimpleForm setTitle(String title) {
         this.title = title;
         return this;
     }
 
+    /**
+     * Set form content
+     * @param content Text
+     * @return SimpleForm
+     */
     public SimpleForm setContent(String content) {
         this.content = content;
         return this;
     }
 
-    public SimpleForm addContent(String addition){
+    /**
+     * Add form content
+     * @param content Text
+     * @return SimpleForm
+     */
+    public SimpleForm addContent(String addition) {
         this.content += addition;
         return this;
     }
 
+    /**
+     * Add a button to the form
+     * @param name Button name
+     * @return SimpleForm
+     */
     public SimpleForm addButton(String name) {
         return addButton(name, null);
     }
 
+    /**
+     * Add a button to the form
+     * @param name    Button name
+     * @param handler Button handler
+     * @return SimpleForm
+     */
     public SimpleForm addButton(String name, SimpleFormHandler handler) {
         return addButton(name, ImageType.PATH, "", handler);
     }
 
+    /**
+     * Add a button to the form
+     * @param name      Button name
+     * @param imageType Type of image on button
+     * @param path      Path to image on button
+     * @return SimpleForm
+     */
     public SimpleForm addButton(String name, ImageType imageType, String path) {
         return addButton(name, imageType, path, null);
     }
 
+    /**
+     * Add a button to the form
+     * @param name      Button name
+     * @param imageType Type of image on button
+     * @param path      Path to image on button
+     * @param handler   Button handler
+     * @return SimpleForm
+     */
     public SimpleForm addButton(String name, ImageType imageType, String path, SimpleFormHandler handler) {
         return addButton(new Button(name, imageType, path, handler));
     }
 
+    /**
+     * Add a button to the form
+     * @param button Button
+     * @return SimpleForm
+     */
     public SimpleForm addButton(Button button) {
         this.buttons.add(button);
         return this;
     }
 
+    /**
+     * Add a buttons to the form
+     * @param buttons Button array
+     * @return SimpleForm
+     */
     public SimpleForm addButtons(Button... buttons) {
         Arrays.asList(buttons).forEach(this::addButton);
         return this;
     }
 
+    /**
+     * Add a buttons to the form
+     * @param buttons Collection of button
+     * @return SimpleForm
+     */
     public SimpleForm addButtons(Collection<Button> buttons) {
         buttons.forEach(this::addButton);
         return this;

@@ -16,10 +16,19 @@ public abstract class Form extends FormWindow {
         this.type = type;
     }
 
+    /**
+     * Send form
+     * @param player Player
+     */
     public void send(Player player) {
         send(player, false);
     }
 
+    /**
+     * Send form
+     * @param player Player
+     * @param async  Send form asynchronously
+     */
     public void send(Player player, boolean async) {
         PlayerFormSendEvent event = new PlayerFormSendEvent(player, this, async);
         Server.getInstance().getPluginManager().callEvent(event);
@@ -30,6 +39,10 @@ public abstract class Form extends FormWindow {
         }
     }
 
+    /**
+     * Send form asynchronously
+     * @param player Player
+     */
     public void sendAsync(Player player) {
         send(player, true);
     }

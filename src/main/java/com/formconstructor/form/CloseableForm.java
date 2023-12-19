@@ -12,6 +12,11 @@ public abstract class CloseableForm extends Form {
 
     private transient NoneHandler noneHandler;
 
+    /**
+     * Set the form close handler
+     * @param noneHandler NoneHandler
+     * @return CloseableForm
+     */
     public CloseableForm setNoneHandler(NoneHandler noneHandler) {
         this.noneHandler = noneHandler;
         return this;

@@ -33,11 +33,22 @@ public class Button extends FormElement {
         this.handler = handler;
     }
 
+    /**
+     * Set button image
+     * @param type Type of image on button
+     * @param path Path to image on button
+     * @return Button
+     */
     public Button setImage(ImageType type, String path) {
         this.image = new ButtonImage(type, path);
         return this;
     }
 
+    /**
+     * Set the button click handler
+     * @param handler SimpleFormHandler
+     * @return Button
+     */
     public Button onClick(SimpleFormHandler handler) {
         this.handler = handler;
         return this;

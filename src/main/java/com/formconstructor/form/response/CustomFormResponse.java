@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 public class CustomFormResponse extends FormResponse<CustomFormHandler> {
 
     @Getter
-    protected final CustomForm form;
-    protected final List<CustomElement> elements;
+    private final CustomForm form;
+    private final List<CustomElement> elements;
 
     public CustomFormResponse(CustomFormHandler handler, List<CustomElement> elements, CustomForm form) {
         super(handler, "");
@@ -29,14 +29,27 @@ public class CustomFormResponse extends FormResponse<CustomFormHandler> {
         this.form = form;
     }
 
+    /**
+     * Check if there is an element with id 
+     */
     public boolean containsId(String elementId) {
         return elements.stream().anyMatch(element -> elementId.equals(element.getElementId()));
     }
 
+    /**
+     * Get element by index
+     * @param index Element index
+     * @return CustomElement
+     */
     public CustomElement getElement(int index) {
         return elements.get(index);
     }
 
+    /**
+     * Get element by element id
+     * @param elementId Element identifier
+     * @return CustomElement
+     */
     public CustomElement getElement(String elementId) {
         return elements.stream()
             .filter(element -> elementId.equals(element.getElementId()))
@@ -55,62 +68,132 @@ public class CustomFormResponse extends FormResponse<CustomFormHandler> {
             .collect(Collectors.toList());
     }
 
+    /**
+     * Get Label by index
+     * @param index Label index
+     * @return Label
+     */
     public Label getLabel(int index) {
         return (Label) getElement(index);
     }
 
+    /**
+     * Get Label by element id
+     * @param elementId Label identifier
+     * @return Label
+     */
     public Label getLabel(String elementId) {
         return getElement(elementId, Label.class);
     }
 
+    /**
+     * Get all labels
+     * @return List<Label>
+     */
     public List<Label> getLabels() {
         return getElements(Label.class);
     }
 
+    /**
+     * Get Input by index
+     * @param index Input index
+     * @return Input
+     */
     public Input getInput(int index) {
         return (Input) getElement(index);
     }
 
+    /**
+     * Get Input by element id
+     * @param elementId Input identifier
+     * @return Input
+     */
     public Input getInput(String elementId) {
         return getElement(elementId, Input.class);
     }
 
+    /**
+     * Get all inputs
+     * @return List<Input>
+     */
     public List<Input> getInputs() {
         return getElements(Input.class);
     }
 
+    /**
+     * Get Toggle by index
+     * @param index Toggle index
+     * @return Toggle
+     */
     public Toggle getToggle(int index) {
         return (Toggle) getElement(index);
     }
 
+    /**
+     * Get Toggle by element id
+     * @param elementId Toggle identifier
+     * @return Toggle
+     */
     public Toggle getToggle(String elementId) {
         return getElement(elementId, Toggle.class);
     }
 
+    /**
+     * Get all toggles
+     * @return List<Toggle>
+     */
     public List<Toggle> getToggles() {
         return getElements(Toggle.class);
     }
 
+    /**
+     * Get StepSlider by index
+     * @param index StepSlider index
+     * @return StepSlider
+     */
     public StepSlider getStepSlider(int index) {
         return (StepSlider) getElement(index);
     }
 
+    /**
+     * Get StepSlider by element id
+     * @param elementId StepSlider identifier
+     * @return StepSlider
+     */
     public StepSlider getStepSlider(String elementId) {
         return getElement(elementId, StepSlider.class);
     }
 
+    /**
+     * Get all step sliders
+     * @return List<StepSlider>
+     */
     public List<StepSlider> getStepSliders() {
         return getElements(StepSlider.class);
     }
 
+    /**
+     * Get Dropdown by index
+     * @param index Dropdown index
+     * @return Dropdown
+     */
     public Dropdown getDropdown(int index) {
         return (Dropdown) getElement(index);
     }
 
+    /**
+     * Get Dropdown by element id
+     * @param elementId Dropdown identifier
+     * @return Dropdown
+     */
     public Dropdown getDropdown(String elementId) {
         return getElement(elementId, Dropdown.class);
     }
 
+    /**
+     * Get all dropdown
+     * @return List<Dropdown>
+     */
     public List<Dropdown> getDropdowns() {
         return getElements(Dropdown.class);
     }

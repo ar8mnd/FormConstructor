@@ -16,6 +16,9 @@ public abstract class FormElement {
         this.name = name;
     }
 
+    /**
+     * Get element name
+     */
     public String getName() {
         return name;
     }

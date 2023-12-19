@@ -46,32 +46,62 @@ public class ModalForm extends CloseableForm {
         this.handler = handler;
     }
 
-    public ModalForm setTitle(String title){
+    /**
+     * Set form title
+     * @param title Text
+     * @return ModalForm
+     */
+    public ModalForm setTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public ModalForm setContent(String content){
+    /**
+     * Set form content
+     * @param content Text
+     * @return ModalForm
+     */
+    public ModalForm setContent(String content) {
         this.content = content;
         return this;
     }
 
-    public ModalForm addContent(String addition){
+    /**
+     * Add form content
+     * @param content Text
+     * @return ModalForm
+     */
+    public ModalForm addContent(String addition) {
         this.content += addition;
         return this;
     }
 
-    public ModalForm setPositiveButton(String text){
+    /**
+     * Set the first button in the form
+     * @param text Button text
+     * @return ModalForm
+     */
+    public ModalForm setPositiveButton(String text) {
         this.positiveButton = text;
         return this;
     }
 
-    public ModalForm setNegativeButton(String text){
+    /**
+     * Set the second button in the form
+     * @param text Button text
+     * @return ModalForm
+     */
+    public ModalForm setNegativeButton(String text) {
         this.negativeButton = text;
         return this;
     }
 
-    public ModalForm setHandler(ModalFormHandler handler){
+    /**
+     * Set form handler
+     * @param handler ModalFormHandler
+     * @return ModalForm
+     */
+    public ModalForm setHandler(ModalFormHandler handler) {
         this.handler = handler;
         return this;
     }

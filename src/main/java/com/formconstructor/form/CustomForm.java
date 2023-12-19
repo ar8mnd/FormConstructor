@@ -45,26 +45,52 @@ public class CustomForm extends CloseableForm {
         this.handler = handler;
     }
 
-    public CustomForm setTitle(String title){
+    /**
+     * Set form title
+     * @param title Text
+     * @return SimpleForm
+     */
+    public CustomForm setTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public CustomForm addElement(String text){
+    /**
+     * Add text element
+     * @param text Text
+     * @return CustomForm
+     */
+    public CustomForm addElement(String text) {
         return addElement(new Label(text));
     }
 
-    public CustomForm addElement(CustomElement element){
+    /**
+     * Add form element
+     * @param element CustomElement
+     * @return CustomForm
+     */
+    public CustomForm addElement(CustomElement element) {
         elements.add(element);
         return this;
     }
 
+    /**
+     * Add form element
+     * @param elementId Element identifier
+     * @param element   CustomElement
+     * @return CustomForm
+     */
     public CustomForm addElement(String elementId, CustomElement element) {
         element.setElementId(elementId);
         return addElement(element);
     }
 
-    public CustomForm setHandler(CustomFormHandler handler){
+    /**
+     * Set form handler
+     * @param handler CustomFormHandler
+     * @return CustomForm
+    */
+    public CustomForm setHandler(CustomFormHandler handler) {
         this.handler = handler;
         return this;
     }
