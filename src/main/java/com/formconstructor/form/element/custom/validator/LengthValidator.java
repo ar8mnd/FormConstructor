@@ -12,6 +12,6 @@ public class LengthValidator extends Validator {
 
     @Override
     public void validate(String input) {
-        this.validated = (min == -1 || input.length() >= min) && (max == -1 || max >= input.length());
+        this.setValidated((min == -1 || input.length() >= min) && (max == -1 || max >= input.length()));
     }
 }

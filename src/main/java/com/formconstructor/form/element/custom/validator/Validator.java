@@ -5,11 +5,15 @@ import lombok.Getter;
 @Getter
 public abstract class Validator {
 
-    protected final String name;
-    protected boolean validated;
+    private final String name;
+    private boolean validated;
 
     public Validator(String name) {
         this.name = name;
+    }
+
+    protected void setValidated(boolean validated) {
+        this.validated = validated;
     }
 
     public abstract void validate(String input);

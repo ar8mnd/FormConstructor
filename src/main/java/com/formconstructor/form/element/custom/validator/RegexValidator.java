@@ -11,6 +11,6 @@ public class RegexValidator extends Validator {
 
     @Override
     public void validate(String input) {
-        this.validated = input.matches(regex);
+        this.setValidated(input.matches(regex));
     }
 }
