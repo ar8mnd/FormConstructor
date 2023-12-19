@@ -5,7 +5,7 @@
 [![CloudBurst](https://img.shields.io/badge/CloudBurst-1.1.2-brightgreen)](https://cloudburstmc.org/resources/formconstructor.738/)
 
 > [!IMPORTANT]
-> The current version of FormConstructor plugin is 2.0.0, if your plugin does not support this version you can download FormConstructor version 1.1.4 from the link below:
+> The current version of FormConstructor plugin is 2.0.0, if your plugin does not support this version you can download FormConstructor version 1.1.4 from the link below:         
 > [Download FormConstructor 1.1.4](https://github.com/MEFRREEX/FormConstructor/tree/1.1.4)
 
 🤔 Introduction
