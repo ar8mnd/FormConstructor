@@ -31,3 +31,10 @@ Changes in responses:
 3. Renamed the `get(Class)` method in CustomFormResponse class to `getElements`
 4. Added `getSlider(int)`, `getSlider(String)` and `getSliders()` methods to CustomFormResponse class
 5. CustomFormResponse class constructor changed from `CustomFormResponse(CustomFormHandler, ArrayList<CustomElement>, HashSet<String>, CustomForm)` to `CustomFormResponse(CustomFormHandler, List<CustomElement>, CustomForm)`
+
+# 1.0.4
+1. Added `PlayerFormSendEvent` class
+2. Added `PlayerFormCloseEvent` class
+3. Added `send(Player player, boolean async)` method to Form class
+4. `ModalForm` class now extends `ClosableForm` class
+5. Event handler moved from `FormConstructor` class to `FormListener` class
