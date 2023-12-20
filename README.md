@@ -1,4 +1,4 @@
-![logo by @tolimag](.github/logo.png)
+![logo by @tolimag](.github/logo_v2.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/Version-2.0.0-brightgreen)](https://github.com/MEFRREEX/FormConstructor/releases/tag/2.0.0)
