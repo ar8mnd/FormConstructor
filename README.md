@@ -8,6 +8,8 @@
 > The current version of FormConstructor plugin is 2.0.0, if your plugin does not support this version you can download FormConstructor version 1.1.4 from the link below:         
 > [Download FormConstructor 1.1.4](https://github.com/MEFRREEX/FormConstructor/tree/1.1.4)
 
+Full list of changes: [CHANGELOG](CHANGELOG.md)
+
 🤔 Introduction
 ------------- 
 
