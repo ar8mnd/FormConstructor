@@ -1,8 +1,9 @@
 ![logo by @tolimag](.github/logo.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-2.0.0-brightgreen)](https://github.com/ContentForge/FormConstructor/releases/tag/1.1.3)
-[![CloudBurst](https://img.shields.io/badge/CloudBurst-1.1.2-brightgreen)](https://cloudburstmc.org/resources/formconstructor.738/)
+[![Version](https://img.shields.io/badge/Version-2.0.0-brightgreen)](https://github.com/MEFRREEX/FormConstructor/releases/tag/2.0.0)
+[![Jitpack](https://jitpack.io/v/MEFRREEX/FormConstructor.svg)](https://jitpack.io/#MEFRREEX/FormConstructor)
+[![CloudBurst](https://img.shields.io/badge/CloudBurst-2.0.0-brightgreen)](https://cloudburstmc.org/resources/formconstructor-v2.957)
 
 > [!IMPORTANT]
 > The current version of FormConstructor plugin is 2.0.0, if your plugin does not support this version you can download FormConstructor version 1.1.4 from the link below:         
