@@ -48,6 +48,11 @@ public class Input extends CustomElement implements ValidationField {
         this.validators = validators;
     }
 
+    @Override
+    public Input setName(String name) {
+        return (Input) super.setName(name);
+    }
+
     public Input setPlaceholder(String placeholder) {
         this.placeholder = placeholder;
         return this;

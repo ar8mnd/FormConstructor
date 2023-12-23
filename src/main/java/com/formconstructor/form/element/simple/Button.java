@@ -33,6 +33,11 @@ public class Button extends FormElement {
         this.handler = handler;
     }
 
+    @Override
+    public Button setName(String name) {
+        return (Button) super.setName(name);
+    }
+
     /**
      * Set button image
      * @param type Type of image on button
