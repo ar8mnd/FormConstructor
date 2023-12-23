@@ -42,6 +42,11 @@ public class Slider extends CustomElement {
         }
     }
 
+    @Override
+    public Slider setName(String name) {
+        return (Slider) super.setName(name);
+    }
+
     public Slider setMin(float min) {
         this.min = min;
         return this;

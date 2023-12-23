@@ -23,6 +23,11 @@ public class Toggle extends CustomElement {
         this.defaultValue = defaultValue;
     }
 
+    @Override
+    public Toggle setName(String name) {
+        return (Toggle) super.setName(name);
+    }
+
     public boolean getDefaultValue() {
         return defaultValue;
     }

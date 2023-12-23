@@ -45,6 +45,11 @@ public class Dropdown extends CustomElement {
         this.addElements(elements);
     }
 
+    @Override
+    public Dropdown setName(String name) {
+        return (Dropdown) super.setName(name);
+    }
+
     public Dropdown addElement(SelectableElement element) {
         element.setIndex(elements.size());
         elements.add(element);

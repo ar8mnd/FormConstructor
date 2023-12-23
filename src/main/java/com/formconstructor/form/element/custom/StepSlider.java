@@ -46,6 +46,11 @@ public class StepSlider extends CustomElement {
         this.addSteps(elements);
     }
 
+    @Override
+    public StepSlider setName(String name) {
+        return (StepSlider) super.setName(name);
+    }
+
     public StepSlider addStep(SelectableElement element) {
         element.setIndex(elements.size());
         elements.add(element);

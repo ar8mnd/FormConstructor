@@ -22,4 +22,12 @@ public abstract class FormElement {
     public String getName() {
         return name;
     }
+
+    /**
+     * Set element name
+     */
+    public FormElement setName(String name) {
+        this.name = name;
+        return this;
+    }
 }
