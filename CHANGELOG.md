@@ -1,3 +1,9 @@
+# 2.0.2
+1. Fixed Input#setDefaultValue method
+
+# 2.0.1
+1. Changes in FormElement#setName method
+
 # 2.0.0
 
 General changes:
