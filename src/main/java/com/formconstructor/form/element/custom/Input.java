@@ -59,7 +59,7 @@ public class Input extends CustomElement implements ValidationField {
     }
 
     public Input setDefaultValue(String defaultValue) {
-        this.value = defaultValue;
+        this.defaultValue = defaultValue;
         return this;
     }
 
