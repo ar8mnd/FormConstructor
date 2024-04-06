@@ -1,3 +1,7 @@
+# 2.0.3
+1. Renamed ButtonImage to ImageData
+2. Added method `setImage(Image image)` in Button class
+
 # 2.0.2
 1. Fixed Input#setDefaultValue method
 
