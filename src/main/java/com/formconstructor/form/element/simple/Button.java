@@ -40,7 +40,7 @@ public class Button extends FormElement {
 
     /**
      * Set button image
-     * @param image Image
+     * @param image ImageData
      * @return Button
      */
     public Button setImage(ImageData image) {
